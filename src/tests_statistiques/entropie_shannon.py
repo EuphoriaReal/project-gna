@@ -1,5 +1,5 @@
 """
-entropie_shannon.py — Entropie de Shannon par octet
+Entropie de Shannon par octet
 
 H = -sum(pi * log2(pi)), maximum théorique = 8.0 bits/octet.
 

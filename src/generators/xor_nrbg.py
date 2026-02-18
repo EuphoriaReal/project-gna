@@ -1,5 +1,5 @@
 """
-xor_nrbg.py — Construction XOR NRBG
+Construction XOR NRBG
 
 On combine plusieurs générateurs par XOR octet à octet.
 Propriété utile : si au moins UNE source est imprévisible,

@@ -1,5 +1,5 @@
 """
-ks_test.py — Test de Kolmogorov-Smirnov
+Test de Kolmogorov-Smirnov
 
 Compare la distribution empirique des octets à une loi uniforme sur [0, 255].
 La statistique D est la distance maximale entre la CDF empirique et la CDF

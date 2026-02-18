@@ -1,5 +1,5 @@
 """
-bbs.py — Générateur Blum-Blum-Shub (BBS)
+Générateur Blum-Blum-Shub (BBS)
 
 Principe :
   - On choisit deux grands premiers p et q congrus à 3 mod 4 ("premiers de Blum")
@@ -9,9 +9,7 @@ Principe :
   - On extrait le bit de poids faible de chaque X_n
 
 Sa sécurité repose sur la difficulté de factoriser n : sans connaître p et q,
-il est impossible de prédire les bits suivants. C'est l'un des rares PRNG
-avec une preuve de sécurité formelle. En contrepartie il est très lent :
-un seul bit utile par itération (carré modulaire).
+il est impossible de prédire les bits suivants.En contrepartie il est très lent : un seul bit utile par itération (carré modulaire).
 """
 
 try:

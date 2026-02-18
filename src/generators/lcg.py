@@ -1,13 +1,11 @@
 """
-lcg.py — Générateur Congruentiel Linéaire (LCG)
+Générateur Congruentiel Linéaire (LCG)
 
 Formule : X_{n+1} = (a * X_n + c) mod m
 Paramètres par défaut : ceux de la glibc (a=1103515245, c=12345, m=2^31).
 
 C'est le générateur le plus simple qui soit. Il est rapide et suffit pour
-des simulations, mais il est totalement prévisible : connaître une seule
-sortie permet de reconstruire toute la suite. À ne jamais utiliser pour
-produire des clés ou des nonces.
+des simulations, mais il est totalement prévisible et ne doit pas être utilisé pour la cryptographie.
 """
 
 

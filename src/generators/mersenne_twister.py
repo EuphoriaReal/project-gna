@@ -1,5 +1,5 @@
 """
-mersenne_twister.py — Mersenne Twister MT19937
+Mersenne Twister MT19937
 
 Période : 2^19937 - 1. État interne : 624 mots de 32 bits.
 C'est le générateur par défaut de Python, R, Ruby entre autres.

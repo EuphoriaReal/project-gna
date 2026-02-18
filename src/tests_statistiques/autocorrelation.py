@@ -1,9 +1,8 @@
 """
-autocorrelation.py — Autocorrélation d'une séquence d'octets
+Autocorrélation d'une séquence d'octets
 
 Mesure la corrélation linéaire entre les valeurs séparées par un décalage (lag).
 Un bon générateur doit donner des valeurs proches de 0 pour tout lag > 0.
-Un LCG trahit souvent des corrélations fortes à des lags réguliers.
 """
 
 
