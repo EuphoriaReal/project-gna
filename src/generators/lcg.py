@@ -2,25 +2,20 @@
 Générateur Congruentiel Linéaire (LCG)
 
 Formule : X_{n+1} = (a * X_n + c) mod m
-Paramètres par défaut : ceux de la glibc (a=1103515245, c=12345, m=2^31).
-
-C'est le générateur le plus simple qui soit. Il est rapide et suffit pour
-des simulations, mais il est totalement prévisible et ne doit pas être utilisé pour la cryptographie.
+On utilise les paramètres de la glibc, les mêmes que rand() en C.
+Période de 2^31, état interne = un seul entier, totalement prévisible.
 """
 
 
 class LCG:
     """
-    Implémentation du Linear Congruential Generator.
-
-    L'état interne est un simple entier mis à jour à chaque appel.
-    Avec les paramètres glibc, la période vaut 2^31.
+    LCG avec les paramètres glibc par défaut. On peut en passer d'autres à l'instanciation.
 
     Args:
-        graine (int): valeur initiale X_0.
+        graine (int): valeur de départ X_0.
         a      (int): multiplicateur.
         c      (int): incrément.
-        m      (int): modulo.
+        m      (int): modulo, détermine la période maximale.
     """
 
     def __init__(self, graine, a=1103515245, c=12345, m=2**31):
@@ -31,7 +26,7 @@ class LCG:
 
     def next(self) -> int:
         """
-        Calcule le prochain entier de la suite.
+        Un pas de la formule, met à jour l'état et retourne la nouvelle valeur.
 
         Returns:
             int: entier dans [0, m-1].
@@ -41,7 +36,7 @@ class LCG:
 
     def next_float(self) -> float:
         """
-        Retourne la prochaine valeur normalisée dans [0, 1).
+        Même chose mais normalisé dans [0, 1), utile pour alimenter Box-Muller.
 
         Returns:
             float: valeur dans [0.0, 1.0).
@@ -50,7 +45,7 @@ class LCG:
 
     def generate(self, n: int) -> list[int]:
         """
-        Génère une liste de n entiers consécutifs.
+        Appelle next() n fois et retourne les résultats dans une liste.
 
         Args:
             n (int): nombre de valeurs voulues.
@@ -65,8 +60,8 @@ class LCG:
 
     def generate_bytes(self, n: int) -> bytes:
         """
-        Génère n octets en gardant seulement les 8 bits de poids faible
-        de chaque valeur produite.
+        Génère n octets en gardant les 8 bits de poids faible de chaque valeur.
+        Ces bits ont une période encore plus courte que le reste, point le plus faible du LCG.
 
         Args:
             n (int): nombre d'octets voulus.
@@ -78,6 +73,7 @@ class LCG:
         for i in range(n):
             octets.append(self.next() & 0xFF)
         return bytes(octets)
+
 
 if __name__ == "__main__":
     gen = LCG(12345)

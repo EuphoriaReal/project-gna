@@ -1,26 +1,27 @@
 """
 Entropie de Shannon par octet
 
-H = -sum(pi * log2(pi)), maximum théorique = 8.0 bits/octet.
+H = -Σ p_i · log2(p_i), maximum théorique pour 256 symboles : 8.0 bits/octet.
 
-Plus H est proche de 8.0, plus la distribution des octets est uniforme
-et la séquence imprévisible.
+Plus H est proche de 8.0, plus chaque octet est surprenant en moyenne,
+c'est-à-dire plus la distribution est proche de l'uniforme.
+Un générateur biaisé (par exemple qui surreprésente certaines valeurs)
+aura une entropie notablement inférieure à 8.
 """
 
 import math
-
 
 class ShannonEntropyTest:
     """
     Mesure la quantité d'information moyenne contenue dans la séquence.
 
-    Calcule les fréquences de chaque octet (0-255) puis applique la formule
-    de Shannon. Une source parfaitement uniforme sur 256 symboles donne H = 8.0.
+    Compte les occurrences de chaque octet (0-255), en déduit les
+    probabilités empiriques et applique la formule de Shannon.
     """
 
     def run(self, donnees: bytes) -> float:
         """
-        Calcule l'entropie de Shannon sur la séquence d'octets.
+        Calcule l'entropie de Shannon de la séquence.
 
         Args:
             donnees (bytes): séquence d'octets à analyser.
@@ -44,6 +45,15 @@ class ShannonEntropyTest:
 
         return entropie
 
+
 def entropie_shannon(donnees: bytes) -> float:
-    test = ShannonEntropyTest()
-    return test.run(donnees)
+    """
+    Calcul l'entropie.
+
+    Args:
+        donnees (bytes): séquence d'octets à analyser.
+
+    Returns:
+        float: entropie en bits/octet dans [0.0, 8.0].
+    """
+    return ShannonEntropyTest().run(donnees)

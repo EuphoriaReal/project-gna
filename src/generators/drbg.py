@@ -66,9 +66,7 @@ class HmacDrbgGenerator:
     def reseed(self, entropie: bytes):
         """
         Réensemence le générateur avec une nouvelle source d'entropie.
-
-        Utile si on soupçonne que l'état a pu être observé, ou simplement
-        pour renouveler périodiquement l'entropie (bonne pratique NIST).
+        pour renouveler périodiquement l'entropie.
 
         Args:
             entropie (bytes): nouvelles données d'entropie fraîches.

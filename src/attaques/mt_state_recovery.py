@@ -25,8 +25,7 @@ def inverser_xor_droite(y: int, shift: int) -> int:
     Inverse l'opération y ^= (y >> shift).
 
     Les bits de rang [32-shift .. 31] sont inchangés et servent de point
-    de départ. On reconstruit les bits suivants fenêtre par fenêtre,
-    en remontant vers les bits de poids faible.
+    de départ. On reconstruit les bits suivants en remontant vers les bits de poids faible.
 
     Args:
         y     (int): valeur à inverser.
@@ -49,7 +48,7 @@ def inverser_xor_gauche_mask(y: int, shift: int, mask: int) -> int:
     Inverse l'opération y ^= (y << shift) & mask.
 
     Les bits de rang [0 .. shift-1] sont inchangés et servent de point
-    de départ. On remonte vers les bits de poids fort, fenêtre par fenêtre.
+    de départ. On remonte vers les bits de poids fort.
 
     Args:
         y     (int): valeur à inverser.
@@ -109,7 +108,7 @@ def cloner_generateur(observations: list[int]):
 
     clone = MersenneTwister(0)
     clone.etat  = etat_reconstruit
-    clone.index = 624  # le vrai generateur est aussi a index=624 apres 624 appels
+    clone.index = 624 
 
     return clone
 

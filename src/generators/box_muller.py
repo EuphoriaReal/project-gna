@@ -25,8 +25,8 @@ class BoxMullerGenerator:
     au prochain appel.
 
     La qualité des normales produites dépend entièrement de la source
-    uniforme passée en paramètre : avec un LCG la sortie sera médiocre,
-    avec os.urandom elle sera bonne.
+    uniforme passée en paramètre : avec un LCG la sortie sera moins qu'avec un ,
+    avec os.urandom.
 
     Args:
         source_uniforme (callable | None): fonction () -> float dans [0, 1).
@@ -90,8 +90,7 @@ def box_muller_basique(u0: float, u1: float) -> tuple[float, float]:
     Forme trigonométrique originale de Box-Muller (1958).
 
     Transforme deux uniformes indépendants en deux normales N(0, 1).
-    Moins efficace que la forme polaire à cause des appels cos/sin,
-    mais utile pour illustrer la formule d'origine.
+    Moins efficace que la forme polaire à cause des appels cos/sin.
 
     Args:
         u0 (float): premier uniforme dans (0, 1].

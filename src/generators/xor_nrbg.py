@@ -3,9 +3,7 @@ Construction XOR NRBG
 
 On combine plusieurs générateurs par XOR octet à octet.
 Propriété utile : si au moins UNE source est imprévisible,
-le résultat l'est aussi -> robustesse face à la défaillance partielle.
 """
-
 
 class XorGenerator:
     """
