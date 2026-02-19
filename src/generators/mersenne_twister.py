@@ -51,9 +51,9 @@ class MersenneTwister:
         """
         self.etat[0] = graine & self.WORD_MASK
         for i in range(1, self.N):
-            self.etat[i] = (
-                self.INIT_CONST * (self.etat[i-1] ^ (self.etat[i-1] >> 30)) + i
-            ) & self.WORD_MASK
+            precedent = self.etat[i - 1]
+            # Mélange le mot précédent avec lui-même décalé, puis ajoute i
+            self.etat[i] = (self.INIT_CONST * (precedent ^ (precedent >> 30)) + i) & self.WORD_MASK
 
     def _twist(self):
         """
@@ -63,10 +63,19 @@ class MersenneTwister:
         quand tous les mots du tableau ont été consommés. Remet l'index à 0.
         """
         for i in range(self.N):
-            y = (self.etat[i] & self.UPPER_MASK) | (self.etat[(i + 1) % self.N] & self.LOWER_MASK)
+            # On prend le bit de poids fort du mot courant
+            # et les 31 bits de poids faible du mot suivant
+            haut = self.etat[i] & self.UPPER_MASK
+            bas  = self.etat[(i + 1) % self.N] & self.LOWER_MASK
+            y = haut | bas
+
+            # On mélange avec le mot situé M positions plus loin
             self.etat[i] = self.etat[(i + self.M) % self.N] ^ (y >> 1)
-            if y % 2 != 0:
+
+            # Si y est impair (bit 0 = 1), on applique la matrice A
+            if y & 1:
                 self.etat[i] ^= self.MATRIX_A
+
         self.index = 0
 
     def _tempering(self, y) -> int:
